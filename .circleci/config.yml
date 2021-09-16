@@ -1,13 +1,19 @@
-dependencies:
-  override:
-    - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
-
-test:
-  override:
-    - mvn -o surefire:test -Dtest=jsonplaceholderAPItest
-
-deployment:
-  main:
-    branch: master
-    commands:
-      - mvn -s .circleci.settings.xml -DskipTests deploy
+jobs:
+  build:
+    docker:
+      - image: circleci/maven:3.8.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+       - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+  test:
+    docker:
+      - image: circleci/maven:3.8.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - mvn -o surefire:test -Dtest=jsonplaceholderAPItest
