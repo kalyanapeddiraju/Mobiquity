@@ -6,7 +6,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-       - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+       - mvn clean install
   test:
     docker:
       - image: circleci/maven:3.8.2
