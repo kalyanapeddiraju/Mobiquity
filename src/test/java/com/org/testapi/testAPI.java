@@ -1,6 +1,7 @@
 package com.org.testapi;
 
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -25,59 +26,82 @@ public class testAPI {
     // GET All users
     @Test (description = " To get the details of user comments and posts")
     @Description (" Description : Testing the API whether success  200")
-   // @Step("#1 GET the User details")
     public void validateTestAPI() throws JSONException, IOException {
-        GETusersEndpoint ="https://jsonplaceholder.typicode.com/users";
-        requestBuilder = new RequestBuilder("GET", GETusersEndpoint,"");
+        GETusersEndpoint = "https://jsonplaceholder.typicode.com/users";
+        requestBuilder = new RequestBuilder("GET", GETusersEndpoint, "");
         restResponse = RestResponse.getRestResponse(requestBuilder);
-
-        String exceptedResponseGetUsers= Helpers.getJsonFromResource("src/test/resources/ExceptedResponse/getUser.json");
-
+        String exceptedResponseGetUsers = Helpers.getJsonFromResource("src/test/resources/ExceptedResponse/getUser.json");
         HashMap<String, String> actualResponse = restResponse.getResponse().path("find{it.username=='Delphine'}");
         JSONObject actualjsonResponseGetUser;
         actualjsonResponseGetUser = new JSONObject(actualResponse);
         //String actualResponse = restResponse.getResponse().path("find{it.username=='Delphine'}").toString();
-
         Helpers.jsonXAssertEquals("Validate Get User Response", actualjsonResponseGetUser.toString(), exceptedResponseGetUsers, JSONCompareMode.STRICT);
         // Get the Id for the specific user
-        String id= restResponse.getResponse().path("find{it.username=='Delphine'}.id").toString();
+        String id = restResponse.getResponse().path("find{it.username=='Delphine'}.id").toString();
         System.out.println(" Get User Response  >>   " + actualjsonResponseGetUser.toString());
         System.out.println(" Get User Response  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
-
         //Validate HTTP Status code
-        assertEquals (String.valueOf (restResponse.getStatusCode ( )), "200", "MisMatch HTTPS Status code >> Get Users");
-
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> Get Users");
         //Get Posts
-        GETPostsEndpoint ="https://jsonplaceholder.typicode.com/posts/"+ id;
-        String exceptedResponseGetPosts= Helpers.getJsonFromResource("src/test/resources/ExceptedResponse/getPostsByid.json");
-        requestBuilder = new RequestBuilder("GET", GETPostsEndpoint,"");
+        GETPostsEndpoint = "https://jsonplaceholder.typicode.com/posts/" + id;
+        String exceptedResponseGetPosts = Helpers.getJsonFromResource("src/test/resources/ExceptedResponse/getPostsByid.json");
+        requestBuilder = new RequestBuilder("GET", GETPostsEndpoint, "");
         restResponse = RestResponse.getRestResponse(requestBuilder);
         Helpers.jsonXAssertEquals("Validate Posts by user Response", restResponse.getResponse().asString(), exceptedResponseGetPosts, JSONCompareMode.STRICT);
-
-        System.out.println(" Get Post by Userid Response  >>   " +restResponse.getResponse().asString());
-        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " +restResponse.getStatusCode());
-
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
         //Validate HTTP Status code
-        assertEquals (String.valueOf (restResponse.getStatusCode ( )), "200", "MisMatch HTTPS Status code >> GET Posts by ID");
-
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Posts by ID");
         //Get Comments
-        String GETCommentsEndpoint="https://jsonplaceholder.typicode.com/comments/"+ id;
-        String exceptedResponseGetComments= Helpers.getJsonFromResource("src/test/resources/ExceptedResponse/getCommentsById.json");
-        requestBuilder = new RequestBuilder("GET",GETCommentsEndpoint,"");
+        String GETCommentsEndpoint = "https://jsonplaceholder.typicode.com/comments/" + id;
+        String exceptedResponseGetComments = Helpers.getJsonFromResource("src/test/resources/ExceptedResponse/getCommentsById.json");
+        requestBuilder = new RequestBuilder("GET", GETCommentsEndpoint, "");
         restResponse = RestResponse.getRestResponse(requestBuilder);
-
-        assertTrue(Helpers.isValidEmailAddress(restResponse.getResponse().path("email"))," Email is invalid");
-        Helpers.jsonXAssertEquals("Validate Comments by User Response", restResponse.getResponse().asString(), exceptedResponseGetComments, JSONCompareMode.STRICT);
 
         System.out.println(" Get Comments by Userid Response  >>   " + restResponse.getResponse().asString());
         System.out.println("Get Comments by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
 
-        //Validate HTTP Status code
-        assertEquals (String.valueOf (restResponse.getStatusCode ( )), "200", "MisMatch HTTPS Status code >> GET Comments by ID");
+        assertTrue(Helpers.isValidEmailAddress(restResponse.getResponse().path("email")), " Email is invalid");
+        Helpers.jsonXAssertEquals("Validate Comments by User Response", restResponse.getResponse().asString(), exceptedResponseGetComments, JSONCompareMode.STRICT);
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Comments by ID");
+    }
+    @Test (description = " To get Multiple posts")
+    @Description (" Description : Testing the GET Post Endpoint whether return multiple list")
+    public void getMultiplePosts() throws JSONException, IOException {
+        //Get multiple Posts
+        GETPostsEndpoint = "https://jsonplaceholder.typicode.com/posts/1/comments";
+        requestBuilder = new RequestBuilder("GET", GETPostsEndpoint, "");
+        restResponse = RestResponse.getRestResponse(requestBuilder);
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1," Issue in Fetching Multiple Records");
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Posts by ID");
+    }
+    @Test (description = " To Check Exception Cases")
+    @Description (" Description : Testing the GET Post Endpoint whether return proper exception HTTP Status")
+    public void getMultiplePostsException_TC_1() throws JSONException, IOException {
+        //Get multiple Posts
+        GETPostsEndpoint = "https://jsonplaceholder.typicode.com/posts/1456/comments";
+        requestBuilder = new RequestBuilder("GET", GETPostsEndpoint, "");
+        restResponse = RestResponse.getRestResponse(requestBuilder);
 
-
-        @Test
-
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() < 1," Issue in Fetching Records");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET Posts/1456/comments");
 
     }
+    @Test (description = " To Check Exception Cases")
+    @Description (" Description : Testing the GET Post Endpoint whether return proper exception HTTP Status")
+    public void getMultiplePostsExceptionTC_2() throws JSONException, IOException {
+        //Get multiple Posts
+        GETPostsEndpoint = "https://jsonplaceholder.typicode.com/posts/1456";
+        requestBuilder = new RequestBuilder("GET", GETPostsEndpoint, "");
+        restResponse = RestResponse.getRestResponse(requestBuilder);
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET Posts/1456");
+
+    }
+
 }
