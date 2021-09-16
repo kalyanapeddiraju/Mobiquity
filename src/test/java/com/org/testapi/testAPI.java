@@ -21,10 +21,10 @@ public class testAPI {
 
     com.org.libapiresthelper.RequestBuilder requestBuilder;
     com.org.libapiresthelper.RestResponse restResponse;
-    String GETusersEndpoint, GETPostsEndpoint;
+    String GETusersEndpoint, GETPostsEndpoint,GETCommentsEndpoint;
 
     // GET All users
-    @Test (description = " To get the details of user comments and posts")
+    @Test (description = " To get the details of a user's Posts and comments")
     @Description (" Description : Testing the API whether success  200")
     public void validateTestAPI() throws JSONException, IOException {
         GETusersEndpoint = "https://jsonplaceholder.typicode.com/users";
@@ -53,7 +53,7 @@ public class testAPI {
         //Validate HTTP Status code
         assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Posts by ID");
         //Get Comments
-        String GETCommentsEndpoint = "https://jsonplaceholder.typicode.com/comments/" + id;
+        GETCommentsEndpoint = "https://jsonplaceholder.typicode.com/comments/" + id;
         String exceptedResponseGetComments = Helpers.getJsonFromResource("src/test/resources/ExceptedResponse/getCommentsById.json");
         requestBuilder = new RequestBuilder("GET", GETCommentsEndpoint, "");
         restResponse = RestResponse.getRestResponse(requestBuilder);
@@ -66,7 +66,7 @@ public class testAPI {
         assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Comments by ID");
     }
     @Test (description = " To get Multiple posts")
-    @Description (" Description : Testing the GET Post Endpoint whether return multiple list")
+    @Description (" Description : Testing the  Posts Endpoint whether return multiple results")
     public void getMultiplePosts() throws JSONException, IOException {
         //Get multiple Posts
         GETPostsEndpoint = "https://jsonplaceholder.typicode.com/posts/1/comments";
@@ -101,7 +101,56 @@ public class testAPI {
         System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
         assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET Posts/1456");
+    }
 
+    @Test (description = " To Check the Comments Endpoint ")
+    @Description (" Description : Testing the Comments Endpoint whether return multiple results")
+    public void getMultipleCommentsTC_1() throws JSONException, IOException {
+        //Get multiple Posts
+        GETCommentsEndpoint = "https://jsonplaceholder.typicode.com/comments/";
+        requestBuilder = new RequestBuilder("GET", GETCommentsEndpoint, "");
+        restResponse = RestResponse.getRestResponse(requestBuilder);
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1," Issue in Fetching Records");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET /comments");
+    }
+
+    @Test (description = " To Check the Comments Endpoint by passing query parameter ")
+    @Description (" Description : Testing the Comments Endpoint whether return multiple results")
+    public void getMultipleCommentsTC_2() throws JSONException, IOException {
+        //Get multiple Posts
+        GETCommentsEndpoint = "https://jsonplaceholder.typicode.com/comments?PostId=1";
+        requestBuilder = new RequestBuilder("GET", GETCommentsEndpoint, "");
+        restResponse = RestResponse.getRestResponse(requestBuilder);
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1," Issue in Fetching Records");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET /Comments?postId=1");
+    }
+
+    @Test (description = " To Check the Comments Endpoint by passing wrong query parameter values ")
+    @Description (" Description : Testing the /Comments Endpoint whether return proper exception https status codes")
+    public void getMultipleCommentsTC_3() throws JSONException, IOException {
+        //Get multiple Posts
+        GETCommentsEndpoint = "https://jsonplaceholder.typicode.com/comments?PostId=12345";
+        requestBuilder = new RequestBuilder("GET", GETCommentsEndpoint, "");
+        restResponse = RestResponse.getRestResponse(requestBuilder);
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET /Comments?postId=1");
+    }
+
+    @Test (description = " To Check the Comments Endpoint by passing wrong Id ")
+    @Description (" Description : Testing the /Comments Endpoint whether return proper exception https status codes")
+    public void getMultipleCommentsTC_4() throws JSONException, IOException {
+        //Get multiple Posts
+        GETCommentsEndpoint = "https://jsonplaceholder.typicode.com/comments/12345";
+        requestBuilder = new RequestBuilder("GET", GETCommentsEndpoint, "");
+        restResponse = RestResponse.getRestResponse(requestBuilder);
+        System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
+        System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET /Comments/1234");
     }
 
 }

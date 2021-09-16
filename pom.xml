@@ -53,8 +53,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
                 <configuration>
+                    <forkCount>3</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>TestNG.xml</suiteXmlFile>
                     </suiteXmlFiles>
@@ -68,7 +70,6 @@
                         <artifactId>aspectjweaver</artifactId>
                         <version>1.9.6</version>
                     </dependency>
-
                 </dependencies>
             </plugin>
         </plugins>
