@@ -1,12 +1,10 @@
-version: 2.0
+version: 2.1
 
 orbs:
-
-  maven: circleci/maven@0.0.12
+  maven: circleci/maven@1.0.3
 
 workflows:
-  maven_test: 
-
-  build-then-test:
+  maven_test:
     jobs:
-      - mvn -s .circleci.settings.xml -DskipTests deploy
+      - maven/test: # checkout, build, test, and upload test results
+          app_src_directory: my-app
