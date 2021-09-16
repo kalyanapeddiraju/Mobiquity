@@ -1,32 +1,12 @@
 version: 2.0
 
-jobs:
-  test:
-    docker:
-      - image: circleci/openjdk:stretch
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: mvn clean install
+orbs:
 
-  build:
-    docker:
-      - image: circleci/openjdk:stretch
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: mvn -s .circleci.settings.xml -DskipTests deploy
+  maven: circleci/maven@0.0.12
 
 workflows:
-  version: 2
+  maven_test: 
 
   build-then-test:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - mvn -s .circleci.settings.xml -DskipTests deploy
