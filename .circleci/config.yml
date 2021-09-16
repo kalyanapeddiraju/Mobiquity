@@ -6,7 +6,8 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-       - mvn clean install
+      - checkout
+      - run: mvn clean install
   test:
     docker:
       - image: circleci/maven:3.8.2
@@ -14,4 +15,5 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - mvn -o surefire:test -Dtest=jsonplaceholderAPItest
+      - checkout
+      - run: mvn -o surefire:test -Dtest=jsonplaceholderAPItest
