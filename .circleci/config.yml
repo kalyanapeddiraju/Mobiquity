@@ -6,7 +6,6 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
        - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
   test:
     docker:
@@ -15,5 +14,4 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
       - mvn -o surefire:test -Dtest=jsonplaceholderAPItest
