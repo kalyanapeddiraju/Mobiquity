@@ -1,13 +1,11 @@
-version: 2.0
+version: 2.1
+workflows:
+  testing:
+    jobs:
+      - runner
 jobs:
-  build:
-    working_directory: ~/repo
- 
+  runner:
+    machine: true
+    resource_class: JSONPlaceHolderAPITest
     steps:
-      - checkout
-      - run: mvn clean build
-  test:
-    working_directory: ~/repo
-    steps:
-        - checkout
-        - run: mvn test
+      - run: echo "Hi I'm on Runners!"
