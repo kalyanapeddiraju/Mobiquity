@@ -1,7 +1,5 @@
 package com.org.libapiresthelper;
 
-import com.org.libapiresthelper.RequestBuilder;
-
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;

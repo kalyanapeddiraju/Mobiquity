@@ -1,6 +1,6 @@
 <suite name = "RestassuredSampleAPI">
     <test name = "test API">
         <classes>
-            <class name = "com.org.testapi.jsonplaceholderAPItest" />
+            <class name = "com.org.testapi.JSONPlaceHolderAPITest" />
         </classes>
     </test>
