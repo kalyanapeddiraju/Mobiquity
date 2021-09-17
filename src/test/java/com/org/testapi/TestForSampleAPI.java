@@ -1,22 +1,24 @@
 package com.org.testapi;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
+import com.org.libapiresthelper.Helpers;
+import com.org.libapiresthelper.RequestBuilder;
 import com.org.libapiresthelper.RestResponse;
 import io.qameta.allure.Description;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.testng.annotations.*;
-import com.org.libapiresthelper.RequestBuilder;
-import com.org.libapiresthelper.Helpers;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
 import java.io.IOException;
 import java.util.HashMap;
 
-public class JSONPlaceHolderAPITest {
-    com.org.libapiresthelper.RequestBuilder requestBuilder;
-    com.org.libapiresthelper.RestResponse restResponse;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+public class TestForSampleAPI {
+    RequestBuilder requestBuilder;
+    RestResponse restResponse;
     String GETusersEndpoint, GETPostsEndpoint,GETCommentsEndpoint,endpointURL,resourcePath;
 
     @BeforeSuite
