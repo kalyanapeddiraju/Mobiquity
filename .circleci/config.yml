@@ -8,4 +8,4 @@ jobs:
     machine: true
     resource_class: medium
     steps:
-      - run: com.org.testapi.JSONPlaceHolderAPITest
+      - run: mvn test
