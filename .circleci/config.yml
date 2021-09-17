@@ -1,11 +1,17 @@
-version: 2.1
+version: 2.0
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: "circleci/maven:3.8.2"
+    steps:
+      - checkout
+      - run: mvn clean build
+  test:
+    working_directory: ~/repo
+    docker: 
+        - image: "circleci/maven:3.8.2"
+    steps:
+        - checkout
+        - run: mvn test
 
-orbs:
-  maven: circleci/maven@1.0.3
-
-workflows:
-  maven_test:
-    jobs:
-      - maven/test: # checkout, build, test, and upload test results
-          app_src_directory: my-app
-      
