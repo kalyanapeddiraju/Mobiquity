@@ -4,6 +4,7 @@ import com.org.libapiresthelper.Helpers;
 import com.org.libapiresthelper.RequestBuilder;
 import com.org.libapiresthelper.RestResponse;
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -166,5 +167,4 @@ public class TestForSampleAPI {
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
         assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET /Comments/1234");
     }
-
 }

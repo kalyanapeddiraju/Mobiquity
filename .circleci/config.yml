@@ -10,7 +10,6 @@ jobs:
     steps:
       - checkout
       - run: mvn clean test
-      - run: mvn
       - run:
           name: Save test results
           Command:
