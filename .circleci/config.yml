@@ -6,6 +6,6 @@ workflows:
 jobs:
   runner:
     machine: true
-    resource_class: JSONPlaceHolderAPITest
+    resource_class: com.org.testapi.JSONPlaceHolderAPITest
     steps:
       - run: echo "Hi I'm on Runners!"
