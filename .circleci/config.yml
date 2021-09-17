@@ -1,17 +1,26 @@
-version: 2.0
+version: 2.1
+workflows:
+  testing:
+    jobs:
+      - runner
 jobs:
-  build:
-    working_directory: ~/repo
-    docker:
-      - image: "circleci/maven:3.8.2"
+  runner:
+    machine: true
+    resource_class: medium
+    working_directory: /tmp
     steps:
       - checkout
-      - run: mvn clean build
-  test:
-    working_directory: ~/repo
-    docker: 
-        - image: "circleci/maven:3.8.2"
-    steps:
-        - checkout
-        - run: mvn test
+      - run: mvn test
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
 
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
