@@ -8,4 +8,5 @@ jobs:
     machine: true
     resource_class: medium
     steps:
+      - checkout
       - run: mvn test
