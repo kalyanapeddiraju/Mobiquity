@@ -16,6 +16,7 @@ jobs:
             mkdir -p ~/test-results/reports/
             chmod -R 755 target
             find . -type f -regex ".*/target/surefire-reports/*.*" -exec cp {} ~/test-results/reports/ \;
+            ls -lrt
           when: always
       - store_test_results:
           path: ~/test-results
