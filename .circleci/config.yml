@@ -10,7 +10,6 @@ jobs:
     steps:
       - checkout
       - run: mvn clean test
-      - run: allure serve target/allure-results
       - run:
           name: Save test results
           command: |
