@@ -10,16 +10,7 @@ jobs:
     steps:
       - checkout
       - run: mvn clean test
-      - run:
-          name: Save test results
-          Command:
-            mkdir -p ~/test-results/testng/
-            find . -type f -regex ".*/target/surefire-reports/*.xml" -exec cp {} ~/test-results/testng/ \;
-          when: always
-      - store_test_results:
-          path:  ~/test-results
-      - store_artifacts:
-          path: ~/test-results/testng
+
 
 
 
