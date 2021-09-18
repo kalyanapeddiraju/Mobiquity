@@ -15,7 +15,7 @@ jobs:
           command: |
             mkdir -p ~/test-results/reports/
             find . -type f -regex ".*/target/surefire-reports/*.*" -exec cp {} ~/test-results/reports/ \;
-            ls -l
+            ls -l target/*.*
           when: always
       - store_test_results:
           path: ~/test-results
