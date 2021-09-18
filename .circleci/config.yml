@@ -8,14 +8,14 @@ jobs:
     machine: true
     resource_class: medium
     steps:
-      - checkout
-      - run: mvn clean test
+    #  - checkout
+    #  - run: mvn clean test
       - run:
           name: Save test results
           command: |
             mkdir -p ~/test-results/reports/
             find . -type f -regex ".*/target/surefire-reports/*.*" -exec cp {} ~/test-results/reports/ \;
-            ls -l
+            ls -l ~/test-results/reports/ 
           when: always
       - store_test_results:
           path: ~/test-results
