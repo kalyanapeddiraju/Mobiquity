@@ -12,7 +12,8 @@ import static org.testng.Assert.assertEquals;
 
 public class Helpers {
 
-    public static void jsonXAssertEquals(String message, String actualJSON, String expectedJSON, JSONCompareMode strict) throws JSONException {
+    public static void jsonXAssertEquals(String message, String actualJSON, String expectedJSON,
+                                         JSONCompareMode strict) throws JSONException {
         if(!expectedJSON.equalsIgnoreCase("")) {
             JSONAssert.assertEquals(message, expectedJSON, actualJSON, strict);
         }else{
@@ -24,7 +25,8 @@ public class Helpers {
     }
 
     public static boolean isValidEmailAddress(String email) {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\." +
+                "[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(email);
         return m.matches();

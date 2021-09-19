@@ -30,7 +30,7 @@ public class TestForSampleAPI {
 
     // GET All users
     @Test (description = "To get the details of a user's Posts and comments")
-    @Description (" Description : Testing the API whether success  200")
+    @Description ("Description : Testing the API whether success  200")
     public void validateJSONPlaceHolderWorkFlow() throws JSONException, IOException {
         GETusersEndpoint=endpointURL + "users";
         requestBuilder = new RequestBuilder("GET", GETusersEndpoint, "");
@@ -39,14 +39,16 @@ public class TestForSampleAPI {
         HashMap<String, String> actualResponse = restResponse.getResponse().path("find{it.username=='Delphine'}");
         JSONObject actualjsonResponseGetUser;
         actualjsonResponseGetUser = new JSONObject(actualResponse);
-        Helpers.jsonXAssertEquals("Validate Get User Response", actualjsonResponseGetUser.toString(), exceptedResponseGetUsers, JSONCompareMode.STRICT);
+        Helpers.jsonXAssertEquals("Validate Get User Response", actualjsonResponseGetUser.toString(),
+                exceptedResponseGetUsers, JSONCompareMode.STRICT);
         String id = restResponse.getResponse().path("find{it.username=='Delphine'}.id").toString();
 
         //System.out.println(" Get User Response  >>   " + actualjsonResponseGetUser.toString());
         //System.out.println(" Get User Response  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
 
 
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> Get Users");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status " +
+                "code >> Get Users");
 
         //Get Posts
         GETPostsEndpoint = endpointURL + "posts/" + id;
@@ -55,12 +57,14 @@ public class TestForSampleAPI {
         requestBuilder = new RequestBuilder("GET", GETPostsEndpoint, "");
         restResponse = RestResponse.getRestResponse(requestBuilder);
 
-        Helpers.jsonXAssertEquals("Validate Posts by user Response", restResponse.getResponse().asString(), exceptedResponseGetPosts, JSONCompareMode.STRICT);
+        Helpers.jsonXAssertEquals("Validate Posts by user Response", restResponse.getResponse().asString(),
+                exceptedResponseGetPosts, JSONCompareMode.STRICT);
 
         //System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
 
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Posts by ID");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status " +
+                "code >> GET Posts by ID");
 
         //Get Comments
         GETCommentsEndpoint = endpointURL + "comments/" + id;
@@ -72,9 +76,12 @@ public class TestForSampleAPI {
         //System.out.println(" Get Comments by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Comments by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
 
-        assertTrue(Helpers.isValidEmailAddress(restResponse.getResponse().path("email")), " Email is invalid");
-        Helpers.jsonXAssertEquals("Validate Comments by User Response", restResponse.getResponse().asString(), exceptedResponseGetComments, JSONCompareMode.STRICT);
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Comments by ID");
+        assertTrue(Helpers.isValidEmailAddress(restResponse.getResponse().path("email")),
+                " Email is invalid");
+        Helpers.jsonXAssertEquals("Validate Comments by User Response", restResponse.getResponse().asString(),
+                exceptedResponseGetComments, JSONCompareMode.STRICT);
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status " +
+                "code >> GET Comments by ID");
     }
 
     @Test (description = "To get Multiple posts")
@@ -85,15 +92,17 @@ public class TestForSampleAPI {
         requestBuilder = new RequestBuilder("GET", GETPostsEndpoint, "");
         restResponse = RestResponse.getRestResponse(requestBuilder);
 
-        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1," Issue in Fetching Multiple Records");
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1,
+                " Issue in Fetching Multiple Records");
 
         //System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
 
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET Posts by ID");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200",
+                "MisMatch HTTPS Status code >> GET Posts by ID");
     }
     @Test (description = "To Check Exception Cases")
-    @Description (" Description : Testing the Post Endpoint whether return proper exception HTTP Status")
+    @Description ("Description : Testing the Post Endpoint whether return proper exception HTTP Status")
     public void validateUserPostsCommentsExceptionScenarioForNonExistUserId() {
         //Get multiple Posts
         GETPostsEndpoint = endpointURL + "posts/1456/comments";
@@ -102,12 +111,14 @@ public class TestForSampleAPI {
 
         //System.out.println("Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
-        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() < 1," Issue in Fetching Records");
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET Posts/1456/comments");
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() < 1,
+                " Issue in Fetching Records");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404",
+                "MisMatch HTTPS Status code >> GET Posts/1456/comments");
 
     }
     @Test (description = "To Check Exception Scenario of / Posts Endpoint")
-    @Description (" Description : Testing the GET Post Endpoint whether return proper exception HTTP Status")
+    @Description ("Description : Testing the GET Post Endpoint whether return proper exception HTTP Status")
     public void validateUserPostsExceptionScenarioForNonExistUser() {
         //Get multiple Posts
         GETPostsEndpoint = endpointURL + "posts/1456";
@@ -115,7 +126,8 @@ public class TestForSampleAPI {
         restResponse = RestResponse.getRestResponse(requestBuilder);
         //System.out.println(" Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET Posts/1456");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status " +
+                "code >> GET Posts/1456");
     }
 
     @Test (description = "To Check Functional behavior of /Comments Endpoint ")
@@ -127,12 +139,14 @@ public class TestForSampleAPI {
         restResponse = RestResponse.getRestResponse(requestBuilder);
         //System.out.println("Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
-        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1," Issue in Fetching Records");
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET /comments");
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1,
+                " Issue in Fetching Records");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status " +
+                "code >> GET /comments");
     }
 
-    @Test (description = " To Check the Comments Endpoint by passing query parameter ")
-    @Description (" Description : Testing the Comments Endpoint whether return multiple results")
+    @Test (description = "To Check the Comments Endpoint by passing query parameter ")
+    @Description ("Description : Testing the Comments Endpoint whether return multiple results")
     public void validateForMultipleCommentsWithQueryParameter() {
         //Get multiple Posts
         GETCommentsEndpoint = endpointURL + "comments?PostId=1";
@@ -140,12 +154,14 @@ public class TestForSampleAPI {
         restResponse = RestResponse.getRestResponse(requestBuilder);
         //System.out.println("Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
-        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1," Issue in Fetching Records");
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status code >> GET /Comments?postId=1");
+        assertTrue(restResponse.getResponse().jsonPath().getList("$").size() > 1,
+                "Issue in Fetching Records");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "200", "MisMatch HTTPS Status " +
+                "code >> GET /Comments?postId=1");
     }
 
-    @Test (description = " To Check the Comments Endpoint by passing wrong query parameter values ")
-    @Description (" Description : Testing the /Comments Endpoint whether return proper exception https status codes")
+    @Test (description = "To Check the Comments Endpoint by passing wrong query parameter values ")
+    @Description ("Description : Testing the /Comments Endpoint whether return proper exception https status codes")
     public void validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter() {
         //Get multiple Posts
         GETCommentsEndpoint = endpointURL+ "comments?PostId=12345";
@@ -153,11 +169,12 @@ public class TestForSampleAPI {
         restResponse = RestResponse.getRestResponse(requestBuilder);
         //System.out.println("Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET /Comments?postId=1");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status " +
+                "code >> GET /Comments?postId=1");
     }
 
-    @Test (description = " To Check the Comments Endpoint by passing wrong Id ")
-    @Description (" Description : Testing the /Comments Endpoint whether return proper exception https status codes")
+    @Test (description = "To Check the Comments Endpoint by passing wrong Id ")
+    @Description ("Description : Testing the /Comments Endpoint whether return proper exception https status codes")
     public void validateCommentsExceptionsScenarioForNonExistPostId() {
         //Get multiple Posts
         GETCommentsEndpoint = endpointURL + "comments/12345";
@@ -165,6 +182,7 @@ public class TestForSampleAPI {
         restResponse = RestResponse.getRestResponse(requestBuilder);
         //System.out.println("Get Post by Userid Response  >>   " + restResponse.getResponse().asString());
         //System.out.println("Get Post by Userid  Actual HTTP Status Code  >>   " + restResponse.getStatusCode());
-        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status code >> GET /Comments/1234");
+        assertEquals(String.valueOf(restResponse.getStatusCode()), "404", "MisMatch HTTPS Status " +
+                "code >> GET /Comments/1234");
     }
 }

@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="8" passed="6" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-09-17T17:33:28 BST" name="Surefire suite" finished-at="2021-09-17T17:33:34 BST" duration-ms="5780">
+  <suite started-at="2021-09-19T15:24:32 BST" name="Surefire suite" finished-at="2021-09-19T15:24:36 BST" duration-ms="4182">
     <groups>
     </groups>
-    <test started-at="2021-09-17T17:33:28 BST" name="Surefire test" finished-at="2021-09-17T17:33:34 BST" duration-ms="5780">
+    <test started-at="2021-09-19T15:24:32 BST" name="Surefire test" finished-at="2021-09-19T15:24:36 BST" duration-ms="4182">
       <class name="com.org.testapi.TestForSampleAPI">
-        <test-method is-config="true" signature="suiteSetup()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:28 BST" name="suiteSetup" finished-at="2021-09-17T17:33:28 BST" duration-ms="25" status="PASS">
+        <test-method is-config="true" signature="suiteSetup()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:32 BST" name="suiteSetup" finished-at="2021-09-19T15:24:32 BST" duration-ms="20" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- suiteSetup -->
-        <test-method signature="validateCommentsExceptionsScenarioForNonExistPostId()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:28 BST" name="validateCommentsExceptionsScenarioForNonExistPostId" description=" To Check the Comments Endpoint by passing wrong Id " finished-at="2021-09-17T17:33:31 BST" duration-ms="2451" status="PASS">
+        <test-method signature="validateCommentsExceptionsScenarioForNonExistPostId()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:32 BST" name="validateCommentsExceptionsScenarioForNonExistPostId" description="To Check the Comments Endpoint by passing wrong Id " finished-at="2021-09-19T15:24:35 BST" duration-ms="2287" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateCommentsExceptionsScenarioForNonExistPostId -->
-        <test-method signature="validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:31 BST" name="validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter" description=" To Check the Comments Endpoint by passing wrong query parameter values " finished-at="2021-09-17T17:33:31 BST" duration-ms="302" status="FAIL">
+        <test-method signature="validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:35 BST" name="validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter" description="To Check the Comments Endpoint by passing wrong query parameter values " finished-at="2021-09-19T15:24:35 BST" duration-ms="121" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[MisMatch HTTPS Status code >> GET /Comments?postId=1 expected [404] but found [200]]]>
@@ -27,7 +27,7 @@ at org.testng.Assert.failNotEquals(Assert.java:1037)
 at org.testng.Assert.assertEqualsImpl(Assert.java:140)
 at org.testng.Assert.assertEquals(Assert.java:122)
 at org.testng.Assert.assertEquals(Assert.java:629)
-at com.org.testapi.TestForSampleAPI.validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter(TestForSampleAPI.java:156)
+at com.org.testapi.TestForSampleAPI.validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter(TestForSampleAPI.java:172)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -68,23 +68,23 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter -->
-        <test-method signature="validateForMultipleComments()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:31 BST" name="validateForMultipleComments" description="To Check Functional behavior of /Comments Endpoint " finished-at="2021-09-17T17:33:32 BST" duration-ms="465" status="PASS">
+        <test-method signature="validateForMultipleComments()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:35 BST" name="validateForMultipleComments" description="To Check Functional behavior of /Comments Endpoint " finished-at="2021-09-19T15:24:35 BST" duration-ms="379" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateForMultipleComments -->
-        <test-method signature="validateForMultipleCommentsWithQueryParameter()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:32 BST" name="validateForMultipleCommentsWithQueryParameter" description=" To Check the Comments Endpoint by passing query parameter " finished-at="2021-09-17T17:33:32 BST" duration-ms="318" status="PASS">
+        <test-method signature="validateForMultipleCommentsWithQueryParameter()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:35 BST" name="validateForMultipleCommentsWithQueryParameter" description="To Check the Comments Endpoint by passing query parameter " finished-at="2021-09-19T15:24:35 BST" duration-ms="145" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateForMultipleCommentsWithQueryParameter -->
-        <test-method signature="validateForMultiplePostsPerUserComments()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:32 BST" name="validateForMultiplePostsPerUserComments" description="To get Multiple posts" finished-at="2021-09-17T17:33:32 BST" duration-ms="247" status="PASS">
+        <test-method signature="validateForMultiplePostsPerUserComments()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:35 BST" name="validateForMultiplePostsPerUserComments" description="To get Multiple posts" finished-at="2021-09-19T15:24:35 BST" duration-ms="87" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateForMultiplePostsPerUserComments -->
-        <test-method signature="validateJSONPlaceHolderWorkFlow()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:32 BST" name="validateJSONPlaceHolderWorkFlow" description="To get the details of a user&#039;s Posts and comments" finished-at="2021-09-17T17:33:34 BST" duration-ms="1365" status="PASS">
+        <test-method signature="validateJSONPlaceHolderWorkFlow()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:35 BST" name="validateJSONPlaceHolderWorkFlow" description="To get the details of a user&#039;s Posts and comments" finished-at="2021-09-19T15:24:36 BST" duration-ms="860" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateJSONPlaceHolderWorkFlow -->
-        <test-method signature="validateUserPostsCommentsExceptionScenarioForNonExistUserId()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:34 BST" name="validateUserPostsCommentsExceptionScenarioForNonExistUserId" description="To Check Exception Cases" finished-at="2021-09-17T17:33:34 BST" duration-ms="244" status="FAIL">
+        <test-method signature="validateUserPostsCommentsExceptionScenarioForNonExistUserId()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:36 BST" name="validateUserPostsCommentsExceptionScenarioForNonExistUserId" description="To Check Exception Cases" finished-at="2021-09-19T15:24:36 BST" duration-ms="102" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[MisMatch HTTPS Status code >> GET Posts/1456/comments expected [404] but found [200]]]>
@@ -96,7 +96,7 @@ at org.testng.Assert.failNotEquals(Assert.java:1037)
 at org.testng.Assert.assertEqualsImpl(Assert.java:140)
 at org.testng.Assert.assertEquals(Assert.java:122)
 at org.testng.Assert.assertEquals(Assert.java:629)
-at com.org.testapi.TestForSampleAPI.validateUserPostsCommentsExceptionScenarioForNonExistUserId(TestForSampleAPI.java:106)
+at com.org.testapi.TestForSampleAPI.validateUserPostsCommentsExceptionScenarioForNonExistUserId(TestForSampleAPI.java:116)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -137,7 +137,7 @@ at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateUserPostsCommentsExceptionScenarioForNonExistUserId -->
-        <test-method signature="validateUserPostsExceptionScenarioForNonExistUser()[pri:0, instance:com.org.testapi.TestForSampleAPI@5e840abf]" started-at="2021-09-17T17:33:34 BST" name="validateUserPostsExceptionScenarioForNonExistUser" description="To Check Exception Scenario of / Posts Endpoint" finished-at="2021-09-17T17:33:34 BST" duration-ms="247" status="PASS">
+        <test-method signature="validateUserPostsExceptionScenarioForNonExistUser()[pri:0, instance:com.org.testapi.TestForSampleAPI@5972d253]" started-at="2021-09-19T15:24:36 BST" name="validateUserPostsExceptionScenarioForNonExistUser" description="To Check Exception Scenario of / Posts Endpoint" finished-at="2021-09-19T15:24:36 BST" duration-ms="86" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateUserPostsExceptionScenarioForNonExistUser -->

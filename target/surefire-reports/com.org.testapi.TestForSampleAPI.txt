@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.org.testapi.TestForSampleAPI
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 7.24 s <<< FAILURE! - in com.org.testapi.TestForSampleAPI
-validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter(com.org.testapi.TestForSampleAPI)  Time elapsed: 0.31 s  <<< FAILURE!
+Tests run: 8, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 5.446 s <<< FAILURE! - in com.org.testapi.TestForSampleAPI
+validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter(com.org.testapi.TestForSampleAPI)  Time elapsed: 0.128 s  <<< FAILURE!
 java.lang.AssertionError: MisMatch HTTPS Status code >> GET /Comments?postId=1 expected [404] but found [200]
-	at com.org.testapi.TestForSampleAPI.validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter(TestForSampleAPI.java:156)
+	at com.org.testapi.TestForSampleAPI.validateCommentsExceptionsScenarioForNonExistPostIdAsQueryParameter(TestForSampleAPI.java:172)
 
-validateUserPostsCommentsExceptionScenarioForNonExistUserId(com.org.testapi.TestForSampleAPI)  Time elapsed: 0.243 s  <<< FAILURE!
+validateUserPostsCommentsExceptionScenarioForNonExistUserId(com.org.testapi.TestForSampleAPI)  Time elapsed: 0.102 s  <<< FAILURE!
 java.lang.AssertionError: MisMatch HTTPS Status code >> GET Posts/1456/comments expected [404] but found [200]
-	at com.org.testapi.TestForSampleAPI.validateUserPostsCommentsExceptionScenarioForNonExistUserId(TestForSampleAPI.java:106)
+	at com.org.testapi.TestForSampleAPI.validateUserPostsCommentsExceptionScenarioForNonExistUserId(TestForSampleAPI.java:116)
 
